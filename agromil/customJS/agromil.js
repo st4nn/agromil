@@ -155,6 +155,167 @@ $.fn.iniciarObjArchivos = function(parametros)
 			    });
 	    });
     }
+}
 
+function lanzarModalMateriaPrimaAgregar()
+{
+	if ($("#cntModal_MateriaPrimaAgregar").length == 0)
+	{
+		var tds = "";
 
+	    tds += '<div class="modal fade" id="cntModal_MateriaPrimaAgregar" tabindex="-1" role="dialog" aria-hidden="true">';
+            tds += '<div class="modal-dialog">';
+                tds += '<div class="modal-content">';
+                    tds += '<form id="frmModal_MateriaPrimaAgregar" class="form-horizontal" role="form">';
+                        tds += '<div class="modal-header">';
+                            tds += '<h4 class="modal-title">Agregar Materia Prima</h4>';
+                        tds += '</div>';
+                        tds += '<div class="modal-body">';
+                            tds += '<div class="form-group">';
+                            	tds += '<label for="txtModal_MateriaPrimaAgregar_Nombre" class="control-label">Nombre</label>'
+                                tds += '<div class="fg-line">';
+                                    tds += '<input id="txtModal_MateriaPrimaAgregar_Nombre" class="form-control guardar" placeholder="Nombre" required>';
+                                tds += '</div>';
+                            tds += '</div>';
+                           	
+                           	tds += '<div class="col-md-7">';
+	                            tds += '<div class="form-group">';
+	                            	tds += '<label for="txtModal_MateriaPrimaAgregar_Unidades" class="control-label">Unidades</label>'
+	                                tds += '<div class="fg-line">';
+	                                    tds += '<input id="txtModal_MateriaPrimaAgregar_Unidades" class="form-control guardar" placeholder="Unidades" required>';
+	                                tds += '</div>';
+	                            tds += '</div>';
+                            tds += '</div>';
+                            tds += '<div class="col-md-5">';
+	                            tds += '<div class="form-group">';
+	                            	tds += '<label for="txtModal_MateriaPrimaAgregar_siglaUnidades" class="control-label">Sigla Unidades</label>'
+	                                tds += '<div class="fg-line">';
+	                                    tds += '<input id="txtModal_MateriaPrimaAgregar_siglaUnidades" class="form-control guardar" placeholder="Sigla Unidades" required>';
+	                                tds += '</div>';
+	                            tds += '</div>';
+	                        tds += '</div>';
+                        	tds += '<div class="col-md-6">';
+	                            tds += '<div class="form-group">';
+	                            	tds += '<label for="txtModal_MateriaPrimaAgregar_cantidadMinima" class="control-label">Cantidad Mínima</label>'
+	                                tds += '<div class="fg-line">';
+	                                    tds += '<input id="txtModal_MateriaPrimaAgregar_cantidadMinima" type="number" step="any" class="form-control guardar" placeholder="Cantidad Mínima" required>';
+	                                tds += '</div>';
+	                            tds += '</div>';
+                            tds += '</div>';
+                            tds += '<div class="col-md-6">';
+	                            tds += '<div class="form-group">';
+	                            	tds += '<label for="txtModal_MateriaPrimaAgregar_cantidadMaxima" class="control-label">Cantidad Máxima</label>'
+	                                tds += '<div class="fg-line">';
+	                                    tds += '<input id="txtModal_MateriaPrimaAgregar_cantidadMaxima" type="number" step="any" class="form-control guardar" placeholder="Cantidad Máxima" required>';
+	                                tds += '</div>';
+	                            tds += '</div>';
+	                        tds += '</div>';
+                        tds += '</div>';
+                        tds += '<div class="modal-footer">';
+                            tds += '<button type="button" id="btnModal_MateriaPrimaAgregar_Cancelar" class="btn btn-link waves-effect">Cancelar</button>';
+                            tds += '<button type="submit" class="btn btn-link waves-effect">Enviar</button>';
+                        tds += '</div>';
+                    tds += '</form>';
+                tds += '</div>';
+            tds += '</div>';
+        tds += '</div>';
+
+        $("body").append(tds);
+
+        $("#btnModal_MateriaPrimaAgregar_Cancelar").on("click", function(evento)
+    	{
+    		evento.preventDefault();
+    		$("#cntModal_MateriaPrimaAgregar").modal("hide");
+    	});
+
+    	$("#frmModal_MateriaPrimaAgregar").on("submit", function(evento)
+    	{
+    		evento.preventDefault();
+    		$("#frmModal_MateriaPrimaAgregar").generarDatosEnvio("txtModal_MateriaPrimaAgregar_", function(datos)
+			{
+				$.post('server/php/proyecto/modals/crearMateriaPrima.php', {Usuario: Usuario.id, datos : datos}, function(data, textStatus, xhr) 
+				{
+					if (!isNaN(data))
+					{
+						Mensaje("Hey", "Los datos han sido Ingresados", "success");	
+						$("#cntModal_MateriaPrimaAgregar").modal("hide");
+					} else
+					{
+						Mensaje("Error",data, "danger");
+					}
+				}).fail(function()
+				{
+					Mensaje("Error", "No hay conexión con el servidor", "danger");
+				});
+			});
+    	});
+    }
+
+    $("#frmModal_MateriaPrimaAgregar")[0].reset();
+    $("#cntModal_MateriaPrimaAgregar").modal("show");
+}
+
+function lanzarModalProveedorAgregar()
+{
+	if ($("#cntModal_ProveedorAgregar").length == 0)
+	{
+		var tds = "";
+
+	    tds += '<div class="modal fade" id="cntModal_ProveedorAgregar" tabindex="-1" role="dialog" aria-hidden="true">';
+            tds += '<div class="modal-dialog">';
+                tds += '<div class="modal-content">';
+                    tds += '<form id="frmModal_ProveedorAgregar" class="form-horizontal" role="form">';
+                        tds += '<div class="modal-header">';
+                            tds += '<h4 class="modal-title">Agregar Proveedor</h4>';
+                        tds += '</div>';
+                        tds += '<div class="modal-body">';
+                            tds += '<div class="form-group">';
+                            	tds += '<label for="txtModal_ProveedorAgregar_Nombre" class="control-label">Nombre</label>'
+                                tds += '<div class="fg-line">';
+                                    tds += '<input id="txtModal_ProveedorAgregar_Nombre" class="form-control guardar" placeholder="Nombre" required>';
+                                tds += '</div>';
+                            tds += '</div>';
+                        tds += '</div>';
+                        tds += '<div class="modal-footer">';
+                            tds += '<button type="button" id="btnModal_ProveedorAgregar_Cancelar" class="btn btn-link waves-effect">Cancelar</button>';
+                            tds += '<button type="submit" class="btn btn-link waves-effect">Enviar</button>';
+                        tds += '</div>';
+                    tds += '</form>';
+                tds += '</div>';
+            tds += '</div>';
+        tds += '</div>';
+
+        $("body").append(tds);
+
+        $("#btnModal_ProveedorAgregar_Cancelar").on("click", function(evento)
+    	{
+    		evento.preventDefault();
+    		$("#cntModal_ProveedorAgregar").modal("hide");
+    	});
+
+    	$("#frmModal_ProveedorAgregar").on("submit", function(evento)
+    	{
+    		evento.preventDefault();
+    		$("#frmModal_ProveedorAgregar").generarDatosEnvio("txtModal_ProveedorAgregar_", function(datos)
+			{
+				$.post('server/php/proyecto/modals/crearProveedor.php', {Usuario: Usuario.id, datos : datos}, function(data, textStatus, xhr) 
+				{
+					if (!isNaN(data))
+					{
+						Mensaje("Hey", "Los datos han sido Ingresados", "success");	
+						$("#cntModal_ProveedorAgregar").modal("hide");
+					} else
+					{
+						Mensaje("Error",data, "danger");
+					}
+				}).fail(function()
+				{
+					Mensaje("Error", "No hay conexión con el servidor", "danger");
+				});
+			});
+    	});
+    }
+
+    $("#frmModal_ProveedorAgregar")[0].reset();
+    $("#cntModal_ProveedorAgregar").modal("show");
 }

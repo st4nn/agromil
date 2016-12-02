@@ -155,6 +155,18 @@ function iniciarModulo()
 		    });
     });
     inventario_CargarLog();
+
+    $("#lnkInventario_AgregarMateriaPrima").on("click", function(evento)
+	{
+		evento.preventDefault();
+		lanzarModalMateriaPrimaAgregar();
+	});
+
+	$("#lnkInventario_AgregarProveedor").on("click", function(evento)
+	{
+		evento.preventDefault();
+		lanzarModalProveedorAgregar();
+	});
 }
 
 function inventario_CargarLog()
