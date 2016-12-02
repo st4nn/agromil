@@ -319,3 +319,80 @@ function lanzarModalProveedorAgregar()
     $("#frmModal_ProveedorAgregar")[0].reset();
     $("#cntModal_ProveedorAgregar").modal("show");
 }
+
+function lanzarModalServicioPublicoAgregar(callback)
+{
+	if (callback === undefined)
+	{
+		callback = function(){};
+	}
+
+	if ($("#cntModal_ServicioPublicoAgregar").length == 0)
+	{
+		var tds = "";
+
+	    tds += '<div class="modal fade" id="cntModal_ServicioPublicoAgregar" tabindex="-1" role="dialog" aria-hidden="true">';
+            tds += '<div class="modal-dialog">';
+                tds += '<div class="modal-content">';
+                    tds += '<form id="frmModal_ServicioPublicoAgregar" class="form-horizontal" role="form">';
+                        tds += '<div class="modal-header">';
+                            tds += '<h4 class="modal-title">Agregar Servicio Público</h4>';
+                        tds += '</div>';
+                        tds += '<div class="modal-body">';
+                            tds += '<div class="form-group">';
+                            	tds += '<label for="txtModal_ServicioPublicoAgregar_Nombre" class="control-label">Nombre</label>'
+                                tds += '<div class="fg-line">';
+                                    tds += '<input id="txtModal_ServicioPublicoAgregar_Nombre" class="form-control guardar" placeholder="Nombre" required>';
+                                tds += '</div>';
+                            tds += '</div>';
+                            tds += '<div class="form-group">';
+                                tds += '<label for="txtModal_ServicioPublicoAgregar_Unidades" class="control-label">Unidades</label>'
+                                tds += '<div class="fg-line">';
+                                    tds += '<input id="txtModal_ServicioPublicoAgregar_Unidades" class="form-control guardar" placeholder="Unidades" required>';
+                                tds += '</div>';
+                            tds += '</div>';
+                        tds += '</div>';
+                        tds += '<div class="modal-footer">';
+                            tds += '<button type="button" id="btnModal_ServicioPublicoAgregar_Cancelar" class="btn btn-link waves-effect">Cancelar</button>';
+                            tds += '<button type="submit" class="btn btn-link waves-effect">Enviar</button>';
+                        tds += '</div>';
+                    tds += '</form>';
+                tds += '</div>';
+            tds += '</div>';
+        tds += '</div>';
+
+        $("body").append(tds);
+
+        $("#btnModal_ServicioPublicoAgregar_Cancelar").on("click", function(evento)
+    	{
+    		evento.preventDefault();
+    		$("#cntModal_ServicioPublicoAgregar").modal("hide");
+    	});
+
+    	$("#frmModal_ServicioPublicoAgregar").on("submit", function(evento)
+    	{
+    		evento.preventDefault();
+    		$("#frmModal_ServicioPublicoAgregar").generarDatosEnvio("txtModal_ServicioPublicoAgregar_", function(datos)
+			{
+				$.post('server/php/proyecto/modals/crearServicioPublico.php', {Usuario: Usuario.id, datos : datos}, function(data, textStatus, xhr) 
+				{
+					if (!isNaN(data))
+					{
+						Mensaje("Hey", "Los datos han sido Ingresados", "success");	
+						$("#cntModal_ServicioPublicoAgregar").modal("hide");
+						callback(data, $("#txtModal_ServicioPublicoAgregar_Nombre").val());
+					} else
+					{
+						Mensaje("Error",data, "danger");
+					}
+				}).fail(function()
+				{
+					Mensaje("Error", "No hay conexión con el servidor", "danger");
+				});
+			});
+    	});
+    }
+
+    $("#frmModal_ServicioPublicoAgregar")[0].reset();
+    $("#cntModal_ServicioPublicoAgregar").modal("show");
+}

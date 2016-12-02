@@ -41,34 +41,79 @@
 
                 <ul class="main-menu">
                 	<br><br><br>
-                    <li><a href="#" id="lnkInventario_AgregarMateriaPrima"><i class="zmdi zmdi-shopping-cart-plus"></i> Agregar Producto</a></li>
-                    <li><a href="#" id="lnkInventario_AgregarProveedor"><i class="zmdi zmdi-accounts-add"></i> Agregar Proveedor</a></li>
+                    <li><a href="#" id="lnkServicioPublicoAgregarProveedor"><i class="zmdi zmdi-accounts-add"></i> Agregar Servicio</a></li>
                 </ul>
             </aside>
 
             <section id="content">
                 <div class="container">
-                    <form id="frmIngresarMateriaPrima">
-                        <button type="submit" class="btn btn-float btn-success m-btn f-18"><i class="zmdi zmdi-floppy"></i></button>
-                        <input type="hidden" id="txtInventario_Prefijo" class="guardar">
+                    <form id="frmIngresarServicioPublico">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Servicio Público</h4>
+                                </div>
+                                <div class="card-body card-padding form-horizontal">
+                                    <div class="form-group">
+                                        <label for="txtServicioPublico_idServicio" class="col-sm-5 control-label">Seleccione un Servicio</label>
+                                        <div class="col-sm-7">
+                                            <div class="fg-line">
+                                                <div class="select">
+                                                    <select class="form-control guardar" id="txtServicioPublico_idServicio" placeholder="Servicio Público" required>
+                                                        <option value="">1</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+
+                                    <div class="table-responsive">
+                                        <table id="tblServicioPublico_Log" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Periodo</th>
+                                                    <th>Consumo</th>
+                                                    <th>Valor Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="cntServicioPublico_Archivos">
+                                
+                            </div>
+                        </div>
+                        <input type="hidden" id="txtServicioPublico_Prefijo" class="guardar">
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="card-header">
-                                    <h2>Ingreso de Materia Prima</h2>
+                                    <h2>Ingreso de Servicios Públicos</h2>
                                 </div>
 
                                 <div class="card-body card-padding form-horizontal">
                                     <div class="row">
                                         <div class="col-sm-12">
+                                            <p>Facturado</p>
+                                        </div>
+                                        <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="txtInventario_idMateriaPrima" class="col-sm-2 control-label">Materia Prima</label>
-                                                <div class="col-sm-10">
+                                                <label for="txtServicioPublico_Desde" class="col-sm-4 control-label">Desde</label>
+                                                <div class="col-sm-8">
                                                     <div class="fg-line">
-                                                        <div class="">
-                                                            <select id="txtInventario_idMateriaPrima" class="col-xs-11 guardar" data-plugin="select2" required placeholder="Materia Prima">
-                                                                <option value=""></option>
-                                                            </select>
-                                                        </div>
+                                                        <input type="text" class="form-control datepicker guardar" id="txtServicioPublico_Desde" placeholder="Desde" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="txtServicioPublico_Hasta" class="col-sm-4 control-label">Hasta</label>
+                                                <div class="col-sm-8">
+                                                    <div class="fg-line">
+                                                        <input type="text" class="form-control datepicker guardar" id="txtServicioPublico_Hasta" placeholder="Hasta" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -76,90 +121,71 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6 form-group">
-                                            <label id="lblInventario_Cantidad" for="txtInventario_Cantidad" class="col-sm-4 control-label">Ingresan</label>
+                                            <label for="txtServicioPublico_valorUnidad" class="col-sm-4 control-label">Valor Unidad</label>
                                             <div class="col-sm-8">
-                                                <div class="fg-line">
-                                                    <input type="number" class="form-control guardar" step="any" id="txtInventario_Cantidad" placeholder="Cantidad a Ingresar" required>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="zmdi zmdi-money"></i></span>
+                                                    <div class="fg-line">
+                                                        <input type="number" class="form-control guardar" step="any" id="txtServicioPublico_valorUnidad" placeholder="Valor Unidad" required>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>  
-
                                         <div class="col-sm-6 form-group">
-                                            <label for="txtInventario_Valor" class="col-sm-4 control-label">Valor <i class="zmdi zmdi-money"></i></label>
+                                            <label for="txtServicioPublico_Consumo" class="col-sm-4 control-label">Consumo Total</label>
                                             <div class="col-sm-8">
-                                                <div class="fg-line">
-                                                    <input type="number" class="form-control guardar" step="any" id="txtInventario_Valor" placeholder="Valor" required>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="zmdi zmdi-lamp"></i></span>
+                                                    <div class="fg-line">
+                                                        <input type="number" class="form-control guardar" step="any" id="txtServicioPublico_Consumo" placeholder="Consumo Total" required>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>  
                                     </div>
-                                    <div class="row">    
+                                    <div class="row">
                                         <div class="col-sm-12 form-group">
-                                            <label for="txtInventario_Cantidad" class="col-sm-2 control-label">Proveedor</label>
+                                            <label for="txtServicioPublico_Valor" class="col-sm-4 control-label">Valor</label>
+                                            <div class="col-sm-8">
+                                                <div class="fg-line">
+                                                    <input type="text" class="form-control guardar separadorDeMiles f-20" id="txtServicioPublico_Valor" placeholder="Valor" required>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12 form-group">
+                                            <label for="txtServicioPublico_Observaciones" class="col-sm-2 control-label">Observaciones</label>
                                             <div class="col-sm-10">
                                                 <div class="fg-line">
-                                                    <div class="">
-                                                        <select id="txtInventario_idProveedor" class="col-xs-11 guardar" data-plugin="select2" placeholder="Proveedor" required>
-                                                            <option value=""></option>
-                                                        </select>
-                                                    </div>
+                                                    <textarea class="form-control guardar" id="txtServicioPublico_Observaciones" rows="3" placeholder="Observaciones"></textarea>
                                                 </div>
                                             </div>
-                                        </div>                                   
+                                        </div>  
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="card">
-                                <div class="card-body card-padding form-horizontal">
-                                    <div class="row">
-                                        <div class="col-sm-12 form-group">
-                                            <div class="col-sm-12">
-                                                <div class="fg-line">
-                                                    <textarea id="txtInventario_Observaciones" class="form-control guardar" rows="3" placeholder="Observaciones"></textarea>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Fecha Real de Ingreso</h4>
-                                </div>
-                                <div class="card-body card-padding form-horizontal">
-                                    <div class="text-center">
-                                        <div class="input-group form-group ">
-                                            <div class="dtp-container fg-line col-sm-12">
-                                                <input type='text' id="txtInventario_FechaIngreso" class="form-control guardar" placeholder="Click Aqui...">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="cntInventario_Archivos">
-                                
+                            <div>
+                                <button type="submit" class="btn btn-success btn-success btn-lg f-18"><i class="zmdi zmdi-floppy"></i> Guardar</button>
                             </div>
                         </div>
                     </form>
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h2>Últimos Ingresos <small>Estos son los ultimos <i id="lblInventario_UltimosCantidad"></i> ingresos desde <i id="lblInventario_UltimosDesde"></i></small></h2>
+                                <h2>Histórico <small>Estos son los ultimos <i id="lblServicioPublico_UltimosCantidad"></i> ingresos desde <i id="lblServicioPublico_UltimosDesde"></i></small></h2>
                             </div>
 
                             <div class="table-responsive">
-                                <table id="tblInventario_Log" class="table table-bordered">
+                                <table id="tblServicioPublico_Historico" class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Fecha</th>
-                                            <th>Materia Prima</th>
-                                            <th>Proveedor</th>
-                                            <th>Cantidad</th>
-                                            <th>Valor</th>
+                                            <th>Servicio</th>
+                                            <th>Periodo</th>
+                                            <th>Consumo</th>
+                                            <th>Valor Unidad</th>
+                                            <th>Valor Total</th>
                                             <th>Fecha Diligenciamiento</th>
                                             <th>Usuario</th>
                                             <th>Observaciones</th>
@@ -212,6 +238,7 @@
         <script src="vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
         <script src="vendors/bower_components/select2/select2.js"></script>
         <script src="vendors/bower_components/select2/i18n/es.js"></script>
+        <script src="vendors/input-mask/input-mask.min.js"></script>
     
         <script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
 
@@ -220,7 +247,7 @@
 
         <script src="customJS/funciones.js"></script>
         <script src="customJS/agromil.js"></script>
-        <script src="customJS/inventario.js"></script>
+        <script src="customJS/serviciosPublicos.js"></script>
         
 
 
