@@ -79,7 +79,7 @@ $.fn.iniciarObjArchivos = function(parametros)
 
 	    	files = event.target.files;
 	    });
-	    
+
 	    $("#frmModal_Archivo").on("submit", function(evento)
 	    {
 	    	evento.preventDefault();
@@ -91,6 +91,8 @@ $.fn.iniciarObjArchivos = function(parametros)
 		    {
 		        data.append(key, value);
 		    });
+
+		    parametros.Prefijo = $(parametros.Prefijo).val();
 
 		    if (parametros != undefined && parametros != null)
 		    {

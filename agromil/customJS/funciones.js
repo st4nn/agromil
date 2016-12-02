@@ -57,14 +57,15 @@ $.fn.generarDatosEnvio = function(restricciones, callback)
 
   $.each(obj, function(index, val) 
   {
-    if ($(val).attr("id") != undefined)
+    var idObj = $(val).attr("id");
+    if (idObj != undefined)
     {
         if ($(val).attr("type") == "checkbox")
         {
-            datos[$(val).attr("id").replace(restricciones, "")] = $(val).is(":checked");
+            datos[idObj.replace(restricciones, "")] = $(val).is(":checked");
         } else
         {
-            datos[$(val).attr("id").replace(restricciones, "")] = $(val).val();
+            datos[idObj.replace(restricciones, "")] = $(val).val();
         }
     }
   });
@@ -276,8 +277,9 @@ $.fn.iniciarSelectRemoto = function(script, delay, minimo)
           },
           cache: true
         },
-        escapeMarkup: function (markup) { return markup; }, 
-        minimumInputLength: minimo,
+      language: "es",
+      escapeMarkup: function (markup) { return markup; }, 
+      minimumInputLength: minimo,
       templateResult: function(dato) { return dato.name;  },
       templateSelection : function(dato)  { return dato.name;   }
     });
