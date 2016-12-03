@@ -157,8 +157,13 @@ $.fn.iniciarObjArchivos = function(parametros)
     }
 }
 
-function lanzarModalMateriaPrimaAgregar()
+function lanzarModalMateriaPrimaAgregar(callback)
 {
+	if (callback === undefined)
+	{
+		callback = function(){};
+	} 
+
 	if ($("#cntModal_MateriaPrimaAgregar").length == 0)
 	{
 		var tds = "";
@@ -239,6 +244,9 @@ function lanzarModalMateriaPrimaAgregar()
 					{
 						Mensaje("Hey", "Los datos han sido Ingresados", "success");	
 						$("#cntModal_MateriaPrimaAgregar").modal("hide");
+						datos = JSON.parse(datos);
+						datos.id = data;
+						callback(datos);
 					} else
 					{
 						Mensaje("Error",data, "danger");
@@ -395,4 +403,177 @@ function lanzarModalServicioPublicoAgregar(callback)
 
     $("#frmModal_ServicioPublicoAgregar")[0].reset();
     $("#cntModal_ServicioPublicoAgregar").modal("show");
+}
+
+function lanzarModalProductoAgregar(callback)
+{
+	if (callback === undefined)
+	{
+		callback = function(){};
+	}
+
+	if ($("#cntModal_ProductoAgregar").length == 0)
+	{
+		var tds = "";
+
+	    tds += '<div class="modal fade" id="cntModal_ProductoAgregar" tabindex="-1" role="dialog" aria-hidden="true">';
+            tds += '<div class="modal-dialog">';
+                tds += '<div class="modal-content">';
+                    tds += '<form id="frmModal_ProductoAgregar" class="form-horizontal" role="form">';
+                        tds += '<div class="modal-header">';
+                            tds += '<h4 class="modal-title">Agregar Producto</h4>';
+                        tds += '</div>';
+                        tds += '<div class="modal-body">';
+                            tds += '<div class="form-group">';
+                            	tds += '<label for="txtModal_ProductoAgregar_Nombre" class="control-label">Nombre</label>'
+                                tds += '<div class="fg-line">';
+                                    tds += '<input id="txtModal_ProductoAgregar_Nombre" class="form-control guardar" placeholder="Nombre" required>';
+                                tds += '</div>';
+                            tds += '</div>';
+                            tds += '<div class="form-group">';
+                                tds += '<label for="txtModal_ProductoAgregar_Presentacion" class="control-label">Presentación</label>'
+                                tds += '<div class="fg-line">';
+                                    tds += '<input id="txtModal_ProductoAgregar_Presentacion" class="form-control guardar" placeholder="Presentación" required>';
+                                tds += '</div>';
+                            tds += '</div>';
+                        tds += '</div>';
+                        tds += '<div class="modal-footer">';
+                            tds += '<button type="button" id="btnModal_ProductoAgregar_Cancelar" class="btn btn-link waves-effect">Cancelar</button>';
+                            tds += '<button type="submit" class="btn btn-link waves-effect">Enviar</button>';
+                        tds += '</div>';
+                    tds += '</form>';
+                tds += '</div>';
+            tds += '</div>';
+        tds += '</div>';
+
+        $("body").append(tds);
+
+        $("#btnModal_ProductoAgregar_Cancelar").on("click", function(evento)
+    	{
+    		evento.preventDefault();
+    		$("#cntModal_ProductoAgregar").modal("hide");
+    	});
+
+    	$("#frmModal_ProductoAgregar").on("submit", function(evento)
+    	{
+    		evento.preventDefault();
+    		$("#frmModal_ProductoAgregar").generarDatosEnvio("txtModal_ProductoAgregar_", function(datos)
+			{
+				$.post('server/php/proyecto/modals/crearProducto.php', {Usuario: Usuario.id, datos : datos}, function(data, textStatus, xhr) 
+				{
+					if (!isNaN(data))
+					{
+						Mensaje("Hey", "Los datos han sido Ingresados", "success");	
+						$("#cntModal_ProductoAgregar").modal("hide");
+						callback(data, $("#txtModal_ProductoAgregar_Nombre").val(), $("#txtModal_ProductoAgregar_Presentacion").val());
+					} else
+					{
+						Mensaje("Error",data, "danger");
+					}
+				}).fail(function()
+				{
+					Mensaje("Error", "No hay conexión con el servidor", "danger");
+				});
+			});
+    	});
+    }
+
+    $("#frmModal_ProductoAgregar")[0].reset();
+    $("#cntModal_ProductoAgregar").modal("show");
+}
+
+function lanzarModalClienteAgregar(callback)
+{
+	if (callback === undefined)
+	{
+		callback = function(){};
+	}
+
+	if ($("#cntModal_ClienteAgregar").length == 0)
+	{
+		var tds = "";
+
+	    tds += '<div class="modal fade" id="cntModal_ClienteAgregar" tabindex="-1" role="dialog" aria-hidden="true">';
+            tds += '<div class="modal-dialog">';
+                tds += '<div class="modal-content">';
+                    tds += '<form id="frmModal_ClienteAgregar" class="form-horizontal" role="form">';
+                        tds += '<div class="modal-header">';
+                            tds += '<h4 class="modal-title">Agregar Producto</h4>';
+                        tds += '</div>';
+                        tds += '<div class="modal-body">';
+                            tds += '<div class="form-group">';
+                            	tds += '<label for="txtModal_ClienteAgregar_Nombre" class="control-label">Nombre</label>'
+                                tds += '<div class="fg-line">';
+                                    tds += '<input id="txtModal_ClienteAgregar_Nombre" class="form-control guardar" placeholder="Nombre" required>';
+                                tds += '</div>';
+                            tds += '</div>';
+                            tds += '<div class="col-sm-6 form-group">';
+                                tds += '<label for="txtModal_ClienteAgregar_Nit" class="control-label">Identificación</label>'
+                                tds += '<div class="fg-line">';
+                                    tds += '<input id="txtModal_ClienteAgregar_Nit" class="form-control guardar" placeholder="Identificación">';
+                                tds += '</div>';
+                            tds += '</div>';
+                            tds += '<div class="col-sm-6 form-group">';
+                                tds += '<label for="txtModal_ClienteAgregar_Telefono" class="control-label">Teléfono</label>'
+                                tds += '<div class="fg-line">';
+                                    tds += '<input id="txtModal_ClienteAgregar_Telefono" class="form-control guardar" placeholder="Teléfono">';
+                                tds += '</div>';
+                            tds += '</div>';
+                            tds += '<div class="col-sm-12 form-group">';
+                                tds += '<label for="txtModal_ClienteAgregar_Direccion" class="control-label">Dirección</label>'
+                                tds += '<div class="fg-line">';
+                                    tds += '<input id="txtModal_ClienteAgregar_Direccion" class="form-control guardar" placeholder="Dirección">';
+                                tds += '</div>';
+                            tds += '</div>';
+                            tds += '<div class="col-sm-12 form-group">';
+                                tds += '<label for="txtModal_ClienteAgregar_Correo" class="control-label">Correo</label>'
+                                tds += '<div class="fg-line">';
+                                    tds += '<input id="txtModal_ClienteAgregar_Correo" type="email" class="form-control guardar" placeholder="Correo">';
+                                tds += '</div>';
+                            tds += '</div>';
+
+                        tds += '</div>';
+                        tds += '<div class="modal-footer">';
+                            tds += '<button type="button" id="btnModal_ClienteAgregar_Cancelar" class="btn btn-link waves-effect">Cancelar</button>';
+                            tds += '<button type="submit" class="btn btn-link waves-effect">Enviar</button>';
+                        tds += '</div>';
+                    tds += '</form>';
+                tds += '</div>';
+            tds += '</div>';
+        tds += '</div>';
+
+        $("body").append(tds);
+
+        $("#btnModal_ClienteAgregar_Cancelar").on("click", function(evento)
+    	{
+    		evento.preventDefault();
+    		$("#cntModal_ClienteAgregar").modal("hide");
+    	});
+
+    	$("#frmModal_ClienteAgregar").on("submit", function(evento)
+    	{
+    		evento.preventDefault();
+    		$("#frmModal_ClienteAgregar").generarDatosEnvio("txtModal_ClienteAgregar_", function(datos)
+			{
+				$.post('server/php/proyecto/modals/crearCliente.php', {Usuario: Usuario.id, datos : datos}, function(data, textStatus, xhr) 
+				{
+					if (!isNaN(data))
+					{
+						Mensaje("Hey", "Los datos han sido Ingresados", "success");	
+						$("#cntModal_ClienteAgregar").modal("hide");
+						callback(data, $("#txtModal_ClienteAgregar_Nombre").val());
+					} else
+					{
+						Mensaje("Error",data, "danger");
+					}
+				}).fail(function()
+				{
+					Mensaje("Error", "No hay conexión con el servidor", "danger");
+				});
+			});
+    	});
+    }
+
+    $("#frmModal_ClienteAgregar")[0].reset();
+    $("#cntModal_ClienteAgregar").modal("show");
 }
