@@ -424,6 +424,7 @@ function lanzarModalProductoAgregar(callback)
                             tds += '<h4 class="modal-title">Agregar Producto</h4>';
                         tds += '</div>';
                         tds += '<div class="modal-body">';
+                    		tds += '<input id="txtModal_ProductoAgregar_id" class="form-control guardar hide" value="0">';
                             tds += '<div class="form-group">';
                             	tds += '<label for="txtModal_ProductoAgregar_Nombre" class="control-label">Nombre</label>'
                                 tds += '<div class="fg-line">';
@@ -498,7 +499,7 @@ function lanzarModalClienteAgregar(callback)
                 tds += '<div class="modal-content">';
                     tds += '<form id="frmModal_ClienteAgregar" class="form-horizontal" role="form">';
                         tds += '<div class="modal-header">';
-                            tds += '<h4 class="modal-title">Agregar Producto</h4>';
+                            tds += '<h4 class="modal-title">Agregar Cliente</h4>';
                         tds += '</div>';
                         tds += '<div class="modal-body">';
                             tds += '<div class="form-group">';

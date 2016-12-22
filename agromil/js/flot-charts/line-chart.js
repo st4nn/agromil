@@ -81,7 +81,7 @@ $(document).ready(function(){
     
     /* Regular Line Chart */
     if ($("#line-chart")[0]) {
-        $.plot($("#line-chart"), [
+        $.plot($("#cntReporte_Grafica"), [
             {data: d1, lines: { show: true, fill: 0.98 }, label: 'Product 1', stack: true, color: '#e3e3e3' },
             {data: d3, lines: { show: true, fill: 0.98 }, label: 'Product 2', stack: true, color: '#FFC107' }
         ], options);

@@ -16,7 +16,7 @@
                DatosUsuarios.Correo
             FROM 
                login AS Login
-               INNER JOIN datosusuarios AS DatosUsuarios ON Login.idLogin = DatosUsuarios.idLogin
+               INNER JOIN datosUsuarios AS DatosUsuarios ON Login.idLogin = DatosUsuarios.idLogin
             WHERE 
                Login.idLogin = $idUsuario
             GROUP BY
@@ -42,7 +42,7 @@
                return $Usuarios;
       } else
       {
-         echo 0;
+         //echo 0;
       }
    }
 ?>

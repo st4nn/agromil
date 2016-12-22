@@ -26,7 +26,7 @@
 
    $fila =  $result->fetch_array(MYSQLI_ASSOC);
 
-   if ($fila['Cantidad'] > 0)
+   if ($fila['Cantidad'] > 0 AND $id == "NULL")
    {
       echo "Ya existe un Producto con ese nombre y presentación, por favor seleccione otro.";
    } else

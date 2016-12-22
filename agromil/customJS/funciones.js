@@ -334,3 +334,67 @@ function separadorMiles(donde,caracter)
     donde.value = cad2;
   }
 } 
+
+$.fn.crearDataTable = function(tds, callback)
+{
+  if (callback === undefined)
+    {callback = function(){};}
+
+  var dtSpanish = {
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Filtrar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst":    "..",
+        "sLast":     "..",
+        "sNext":     ">",
+        "sPrevious": "<"
+    },
+    "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    }
+  };
+
+  var options = {
+        "aoColumnDefs": [{
+          'bSortable': false,
+          'aTargets': [-1]
+        }],
+        "iDisplayLength": 10,
+        "aLengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, "Todos"]
+        ],
+        "sDom": '<"dt-panelmenu clearfix"lTfr>t<"dt-panelfooter clearfix"ip>',
+        "oTableTools": {
+          "sSwfPath": "vendors/datatables-tabletools/swf/copy_csv_xls_pdf.swf"
+        },
+        "language" : dtSpanish
+      };
+
+  var idObj = $(this).attr("id");
+  if ($("#" + idObj + "_wrapper").length == 1)
+    {
+        $(this).dataTable().fnDestroy();
+    } 
+
+    if (tds != undefined && tds != "")
+    {
+      $(this).find("tbody").find("tr").remove();
+      $("#" + idObj + " tbody").append(tds);
+    }
+
+  $(this).DataTable(options);
+  $(".DTTT_button").addClass('btn btn-outline btn-default m-l-5');
+  callback();
+}

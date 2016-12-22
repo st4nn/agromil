@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Agromil App</title>
+
+        <!-- Vendor CSS -->
+        <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+        <link href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
+        <link href="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
+        <link href="vendors/bootgrid/jquery.bootgrid.min.css" rel="stylesheet">
+        <link href="vendors/bower_components/google-material-color/dist/palette.css" rel="stylesheet">
+
+        <link href="vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+        <!-- CSS -->
+        <link href="css/app.min.1.css" rel="stylesheet">
+        <link href="css/app.min.2.css" rel="stylesheet">
+        
+    </head>
+    <body data-ma-header="teal">
+        <header id="header" class="media">
+            
+        </header>
+
+        <section id="main">
+            <aside id="s-main-menu" class="sidebar">
+                <div class="smm-header">
+                    <i class="zmdi zmdi-long-arrow-left" data-ma-action="sidebar-close"></i>
+                </div>
+
+                <ul class="smm-alerts">
+
+                </ul>
+
+                <ul class="main-menu">
+                	<br><br><br>
+                    <li><a data-toggle="modal" href="#modalWider"><i class="zmdi zmdi-account-add"></i> Nuevo Usuario</a></li>
+                </ul>
+            </aside>
+
+            <input id="txtUsuarios_idUsuario" type="hidden">
+
+            <section id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>Procesos <small>Seleccione un proceso para iniciar la consulta</small></h2>
+                                </div>
+                                <div class="card-body card-padding form-horizontal">
+                                    <div class="form-group">
+                                        <label for="txtReportes_idProceso" class="col-sm-5 control-label">Seleccione un Proceso</label>
+                                        <div class="col-sm-7">
+                                            <div class="fg-line">
+                                                <div class="select">
+                                                    <select class="form-control selectpicker guardar" id="txtReportes_idProceso" data-live-search="true" placeholder="Procesos" required>
+                                                        <option value=""></option>
+                                                        <option value="1">Materia Prima</option>
+                                                        <option value="2">Servicios Públicos</option>
+                                                        <option value="3">Despachos</option>
+                                                        <option value="4">Producción</option>
+                                                        <option value="5">Stock Materia Prima</option>
+                                                        <option value="6">Producido Total</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>Filtros <small></small></h2>
+                                </div>
+                                <div class="card-body card-padding form-horizontal">
+                                    <div class="row">
+                                            <div class="col-sm-6 form-group">
+                                                <label for="txtServicioPublico_Desde" class="col-sm-4 control-label">Desde</label>
+                                                <div class="col-sm-8">
+                                                    <div class="fg-line">
+                                                        <input type="text" class="form-control datepicker guardar" id="txtServicioPublico_Desde" placeholder="Desde" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 form-group">
+                                                <label for="txtServicioPublico_Hasta" class="col-sm-4 control-label">Hasta</label>
+                                                <div class="col-sm-8">
+                                                    <div class="fg-line">
+                                                        <input type="text" class="form-control datepicker guardar" id="txtServicioPublico_Hasta" placeholder="Hasta" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="cntReportes_Tabla" class="animated bounceInLeft">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 id="lblReportes_Nombre"> <small></small></h2>
+                            </div>
+                            <div class="card-body card-padding">
+                                <button id="btnReportes_Actualizar" class="btn palette-Green bg waves-effect pull-right"><i class="zmdi zmdi-refresh-alt zmdi-hc-fw"></i> Actualizar</button>
+                                <button id="btnReporte_VerGrafica" class="btn palette-Orange bg waves-effect pull-right m-r-20"><i class="zmdi zmdi-chart zmdi-hc-fw"></i> Ver Gráfica</button>
+                                <div id="cntReportes_Resultado_Tabla" class="table-responsive">
+                                    <table id="tblUsuarios_Resultado" class="table table-striped">
+                                        <thead>                                    
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cntReportes_Grafica" class="animated bounceInRight">
+                        <div class="card">
+                            <div class="card-header">
+                                <button id="btnReporte_VerTabla" class="btn palette-Orange bg waves-effect pull-right m-r-20"><i class="zmdi zmdi-chart zmdi-hc-fw"></i> Ver Tabla</button>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="chart-edge">
+                                    <div id="cntReporte_Grafica" class="col-md-12 flot-chart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer id="footer">
+                <!--Copyright &copy; 2015 Material Admin-->
+
+                <ul class="f-menu">
+                    <img src="img/logo_gris.png" alt="">
+                </ul>
+            </footer>
+
+        </section>
+
+        <!-- Page Loader -->
+        <div class="page-loader palette-Teal bg">
+            <div class="preloader pl-xl pls-white">
+                <svg class="pl-circular" viewBox="25 25 50 50">
+                    <circle class="plc-path" cx="50" cy="50" r="20"/>
+                </svg>
+            </div>
+        </div>
+        
+        <!-- Javascript Libraries -->
+        <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        
+        <script src="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
+        <script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+        <script src="vendors/bootgrid/jquery.bootgrid.updated.min.js"></script>
+        <script src="vendors/bower_components/autosize/dist/autosize.min.js"></script>
+
+        <script src="vendors/bower_components/moment/min/moment.min.js"></script>
+        <script src="vendors/bower_components/moment/min/local.es.js"></script>
+        <script src="vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+        <script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+
+        <script src="vendors/bower_components/flot/jquery.flot.js"></script>
+        <script src="vendors/bower_components/flot/jquery.flot.resize.js"></script>
+        <script src="vendors/bower_components/flot/jquery.flot.pie.js"></script>
+        <script src="vendors/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+        <script src="vendors/bower_components/flot-orderBars/js/jquery.flot.orderBars.js"></script>
+        <script src="vendors/bower_components/flot.curvedlines/curvedLines.js"></script>                         
+        <script src="vendors/bower_components/flot-orderBars/js/jquery.flot.orderBars.js"></script>
+
+        <script src="js/functions.js"></script>
+        <script src="js/actions.js"></script>
+
+        <script src="customJS/funciones.js"></script>
+        <script src="customJS/agromil.js"></script>
+        <script src="customJS/reportes.js"></script>
+    </body>
+  </html>

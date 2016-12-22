@@ -13,7 +13,7 @@
                Login.idPerfil AS 'idPerfil',
                Datos.*
             FROM 
-               Login AS Login
+               login AS Login
                INNER JOIN datosUsuarios AS Datos ON Datos.idLogin = Login.idLogin
             WHERE 
                Login.Usuario = '$usuario' 
