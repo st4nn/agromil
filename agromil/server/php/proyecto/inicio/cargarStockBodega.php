@@ -30,7 +30,7 @@
 
    $Usuario = datosUsuario($idUsuario);
 
-   $sql = "SELECT NombreReferencia, SUM(Sacos) AS Sacos FROM Produccion WHERE 1 GROUP BY CodigoReferencia;";
+   $sql = "SELECT NombreReferencia, SUM(Sacos) AS Sacos FROM Produccion WHERE 1 GROUP BY CodigoReferencia, NombreReferencia;";
 
    $result = $link->query($sql);
 

@@ -38,7 +38,7 @@
                 </ul>
 
                 <div class="main-menu">
-                	<br><br>
+                	
                     <div class="card popular-post">
                         <div class="card-header ch-img" style="background-image: url(img/headers/sm/4.png); height: 150px;">
                             <h2>Notificaciones <small>Notificaciones recientes</small></h2>
@@ -119,8 +119,12 @@
                     </div>
 
                     <div>
-                        <div id="cntHome_Produccion" class="clearfix" data-columns>
-
+                        <div id="cntHome_Produccion" class="clearfix">
+                            <div class="preloader pls-red">
+                                <svg class="pl-circular" viewBox="25 25 50 50">
+                                    <circle class="plc-path" cx="50" cy="50" r="20"></circle>
+                                </svg>
+                            </div>
                         </div>
 
                         <div class="col-sm-4">
@@ -133,6 +137,25 @@
 
                                 <div class="card-body">
                                     <div id="cntHome_StockBodega" class="list-group lg-alt">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card rating-list">
+                                <div class="card-header palette-Teal-400 bg">
+                                    <h2 class="palette-White text">Pago de Servicios Públicos</h2>
+                                </div>
+
+                                <div class="card-body card-padding-sm ">
+                                    <div class="row text-center palette-Teal-200 bg">
+                                        <div class="col-xs-6">
+                                            <h5 class="palette-White text">Unidades</h5>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <h5 class="palette-White text">Valor</h5>
+                                        </div>
+                                    </div>
+                                    <div id="cntHome_ServiciosPublicos" class="list-group lg-alt">
                                     </div>
                                 </div>
                             </div>
@@ -157,10 +180,10 @@
                                 <div class="card-body card-padding-sm ">
                                     <div class="row text-center palette-Teal-200 bg">
                                         <div class="col-xs-6">
-                                            <h4 class="palette-White text">Salidas</h4>
+                                            <h5 class="palette-White text">Salidas</h5>
                                         </div>
                                         <div class="col-xs-6">
-                                            <h4 class="palette-White text">Ingresos</h4>
+                                            <h5 class="palette-White text">Ingresos</h5>
                                         </div>
                                     </div>
                                     <div id="cntHome_MateriaPrima" class="list-group lg-alt">
@@ -182,47 +205,14 @@
                                 </div>
                             </div>
 
+                        </div>
+                        <div class="col-sm-12">
                             <div class="card palette-Blue-400 bg">
                                 <div class="card-header palette-Blue-600 bg">
                                     <div class="cwh-day">Stock de Materia Prima</div>
                                 </div>
                                 <div id="cntStockMateriaPrima" class="pie-grid clearfix text-center">
-                                    <div class="col-xs-4 col-sm-6 col-md-4 pg-item">
-                                        <div class="easy-pie-2 easy-pie" data-percent="92">
-                                            <span class="ep-value">92</span>
-                                        </div>
-                                        <div class="pgi-title">Email<br> Scheduled</div>
-                                    </div>
-                                    <div class="col-xs-4 col-sm-6 col-md-4 pg-item">
-                                        <div class="easy-pie-3 easy-pie" data-percent="11">
-                                            <span class="ep-value">11</span>
-                                        </div>
-                                        <div class="pgi-title">Email<br> Bounced</div>
-                                    </div>
-                                    <div class="col-xs-4 col-sm-6 col-md-4 pg-item">
-                                        <div class="easy-pie-4 easy-pie" data-percent="52">
-                                            <span class="ep-value">52</span>
-                                        </div>
-                                        <div class="pgi-title">Email<br> Opened</div>
-                                    </div>
-                                    <div class="col-xs-4 col-sm-6 col-md-4 pg-item">
-                                        <div class="easy-pie-2 easy-pie" data-percent="44">
-                                            <span class="ep-value">44</span>
-                                        </div>
-                                        <div class="pgi-title">Storage<br>Remaining</div>
-                                    </div>
-                                    <div class="col-xs-4 col-sm-6 col-md-4 pg-item">
-                                        <div class="easy-pie-3 easy-pie" data-percent="78">
-                                            <span class="ep-value">78</span>
-                                        </div>
-                                        <div class="pgi-title">Web Page<br> Views</div>
-                                    </div>
-                                    <div class="col-xs-4 col-sm-6 col-md-4 pg-item">
-                                        <div class="easy-pie-4 easy-pie" data-percent="32">
-                                            <span class="ep-value">32</span>
-                                        </div>
-                                        <div class="pgi-title">Server<br> Processing</div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>

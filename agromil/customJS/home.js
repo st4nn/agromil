@@ -96,7 +96,7 @@ function cargarInicio(Desde, Hasta)
 	{
 		var tds = "";
 
-		tds += '<div class="column size-1of3">';
+		tds += '<div class="col-sm-4">';
 			tds += '<div class="card c-dark ' + obtenerColor() + ' bg">';
                 tds += '<div class="card-header">';
                     tds += '<h2>' + val.NombreReferencia + ' <br><strong>' + val.Sacos + ' Sacos</strong></h2>';
@@ -277,23 +277,80 @@ function cargarInicio(Desde, Hasta)
 				contador = 2;
 			}
 
+			if (val.Cantidad == "")
+			{
+				val.Cantidad = 0;
+			}
+
 			
-			tds += '<div class="col-xs-4 col-sm-6 col-md-4 pg-item">';
+			tds += '<div class="col-xs-4 col-sm-3 col-md-2 pg-item">';
                 tds += '<div class="easy-pie-' + contador + ' easy-pie" data-percent="' + val.Porcentaje + '">';
                     tds += '<span class="ep-value">' + val.Cantidad + '</span>';
                 tds += '</div>';
-                tds += '<div class="pgi-title">' + val.Nombre.replace(/ /g, '<br>') + '</div>';
+                tds += '<div class="pgi-title o-hidden">' + val.Nombre + ' (<small>' + val.Unidades + '</small>)</div>';
             tds += '</div>';
 
             contador++;
 		});
 
         return tds;
-	}, false, Desde, Hasta, "div", 'Stock de Materia Prima');
+	}, false, Desde, Hasta, "div", 'Stock de Materia Prima', function()
+	{
+		easyPieChart('easy-pie', '#fff', 'rgba(0,0,0,0.08)', 'rgba(0,0,0,0)', 2, 75);
+	});
+
+	$("#cntHome_ServiciosPublicos").cargarDatosInicio('cargarServiciosPublicos', function(data)
+	{
+		var tds = "";
+		var TotalConsumo = data[(data.length-1)].TotalConsumo;
+		var TotalValor = data[(data.length-1)].TotalValor;
+
+		var PorcentajeIngresos = 0;
+		var PorcentajeSalidas = 0;
+
+		var color = "";
+
+		$.each(data, function(index, val) 
+		{
+			color = obtenerColor();
+
+			PorcentajeConsumo = ((val.Consumo/TotalConsumo) * 100).toFixed(2);
+			PorcentajeValor = ((val.Valor/TotalValor) * 100).toFixed(2);
+
+			tds += '<div class="list-group-item media">';
+	            tds += '<div class="media-body">';
+	            	tds += '<div class="lgi-heading m-b-5 text-center">' + val.Nombre + '</div>';
+	            	tds += '<div class="col-xs-3">' + val.Consumo;
+	            	tds += '</div>';
+	            	tds += '<div class="col-xs-3">';
+		                tds += '<div class="progress">';
+		                    tds += '<div class="progress-bar ' + color + ' palette bg" role="progressbar" aria-valuenow="' + val.Consumo + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + PorcentajeConsumo + '%">';
+		                    tds += '</div>';
+		                tds += '</div>';
+		            tds += '</div>';
+		            tds += '<div class="col-xs-3">$' + val.Valor;
+	            	tds += '</div>';
+		            tds += '<div class="col-xs-3">';
+		                tds += '<div class="progress">';
+		                    tds += '<div class="progress-bar ' + color + ' palette bg" role="progressbar" aria-valuenow="' + val.Valor + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + PorcentajeValor + '%">';
+		                    tds += '</div>';
+		                tds += '</div>';
+		            tds += '</div>';
+	            tds += '</div>';
+	        tds += '</div>';
+		});
+
+        return tds;
+	}, false, Desde, Hasta, "div", 'Movimiento de Servicios Públicos');
 }
 
-$.fn.cargarDatosInicio = function(url, laFuncion,  funcionEach, Desde, Hasta, tipoContenedor, tipoDatos)
+$.fn.cargarDatosInicio = function(url, laFuncion,  funcionEach, Desde, Hasta, tipoContenedor, tipoDatos, callback)
 {
+	if (callback === undefined)
+	{
+		callback = function(){};
+	}
+
 	var obj = this;
 	if (url != "")
 	{
@@ -321,8 +378,7 @@ $.fn.cargarDatosInicio = function(url, laFuncion,  funcionEach, Desde, Hasta, ti
 
 				$(obj).append(tds);
 
-				$(".easy-pie").easyPieChart();
-
+				callback();
 			} else
 			{
 				var tds = "";
@@ -336,4 +392,20 @@ $.fn.cargarDatosInicio = function(url, laFuncion,  funcionEach, Desde, Hasta, ti
 			}
 		}, "json");
 	}
+}
+
+function easyPieChart(id, barColor, trackColor, scaleColor, lineWidth, size) {
+    $('.'+id).easyPieChart({
+        easing: 'easeOutBounce',
+        barColor: barColor,
+        trackColor: trackColor,
+        scaleColor: scaleColor,
+        lineCap: 'square',
+        lineWidth: lineWidth,
+        size: size,
+        animate: 3000,
+        onStep: function(from, to, percent) {
+            $(this.el).find('.percent').text(Math.round(percent));
+        }
+    });
 }

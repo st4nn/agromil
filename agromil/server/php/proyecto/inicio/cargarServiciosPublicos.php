@@ -11,7 +11,7 @@
 
    if ($Desde <> "")
    {
-      $where .= " Despachos.Fecha >= '$Desde 00:00:00' ";
+      $where .= " ingresoServiciosPublicos.fechaCargue >= '$Desde 00:00:00' ";
    }
 
    if ($Hasta <> "")
@@ -20,7 +20,7 @@
       {
          $where .= " AND ";
       }
-      $where .= " Despachos.Fecha <= '$Hasta 23:59:59' ";
+      $where .= " ingresoServiciosPublicos.fechaCargue <= '$Hasta  23:59:59' ";
    }
 
    if ($where <> "")
@@ -31,20 +31,23 @@
    $Usuario = datosUsuario($idUsuario);
 
    $sql = "SELECT 
-            materiaPrima.Nombre, 
-            materiaPrima.siglaUnidades AS Unidades, 
-            stock.Cantidad,
-            ((stock.Cantidad/materiaPrima.cantidadMaxima)*100) AS Porcentaje 
-         FROM 
-            materiaPrima
-            LEFT JOIN stock ON materiaPrima.id = stock.idMateriaPrima 
-         WHERE 1
-            ORDER BY materiaPrima.Nombre;";
+               serviciosPublicos.Nombre, 
+               SUM(ingresoServiciosPublicos.Consumo) AS Consumo, 
+               SUM(ingresoServiciosPublicos.Valor) AS Valor 
+            FROM 
+               ingresoServiciosPublicos
+               INNER JOIN serviciosPublicos ON serviciosPublicos.id = ingresoServiciosPublicos.idServicio
+               $where 
+            GROUP BY
+               ingresoServiciosPublicos.idServicio";
+
 
    $result = $link->query($sql);
 
    $idx = 0;
-   $Cantidad = 0;
+   $CantidadConsumo = 0;
+   $CantidadValor = 0;
+
    if ( $result->num_rows > 0)
    {
       $Resultado = array();
@@ -55,9 +58,16 @@
          {
             $Resultado[$idx][$key] = utf8_encode($value);
          }
+         
+         $CantidadConsumo += $row['Consumo'];
+         $CantidadValor += $row['Valor'];
 
          $idx++;
       }
+
+         $Resultado[($idx - 1)]['TotalConsumo'] = $CantidadConsumo;
+         $Resultado[($idx - 1)]['TotalValor'] = $CantidadValor;
+      
          mysqli_free_result($result);
          echo json_encode($Resultado);
    } else

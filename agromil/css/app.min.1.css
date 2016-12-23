@@ -11315,7 +11315,7 @@ pre {
 }
 
 .ep-value:after {
-  content: "%";
+  content: "";
 }
 
 .ep-lg .ep-value {
