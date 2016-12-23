@@ -4,10 +4,29 @@
    $link = Conectar();
 
    $idUsuario = addslashes($_POST['Usuario']);
-   $Desde = addslashes($_POST['Desde']) . ' 00:00:00';
-   $Hasta = addslashes($_POST['Hasta']) . ' 23:59:59';
+   $Desde = addslashes($_POST['Desde']);
+   $Hasta = addslashes($_POST['Hasta']);
 
    $where = "";
+
+   if ($Desde <> "")
+   {
+      $where .= " Produccion.HoraInicio >= '$Desde 00:00:00' ";
+   }
+
+   if ($Hasta <> "")
+   {
+      if ($Desde <> "")
+      {
+         $where .= " AND ";
+      }
+      $where .= " Produccion.HoraFin <= '$Hasta 23:59:59' ";
+   }
+
+   if ($where <> "")
+   {
+      $where = " WHERE " . $where;
+   }
 
    $Usuario = datosUsuario($idUsuario);
 
@@ -17,9 +36,7 @@
                SUM(Produccion.Sacos) AS Sacos
          FROM 
             Produccion
-         WHERE
-            Produccion.HoraInicio >= '$Desde'
-            AND Produccion.HoraFin <= '$Hasta'
+         $where
          GROUP BY 
             Produccion.NombreReferencia;";
 

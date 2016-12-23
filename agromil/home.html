@@ -13,6 +13,9 @@
         <link href="vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
         <link href="vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">        
         <link href="vendors/bower_components/google-material-color/dist/palette.css" rel="stylesheet">
+
+        <link href="vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+        <!--<link href="vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">-->
         
         <!-- CSS -->
         <link href="css/app.min.1.css" rel="stylesheet">
@@ -34,76 +37,195 @@
 
                 </ul>
 
-                <ul class="main-menu">
-                	<br><br><br>
-                </ul>
+                <div class="main-menu">
+                	<br><br>
+                    <div class="card popular-post">
+                        <div class="card-header ch-img" style="background-image: url(img/headers/sm/4.png); height: 150px;">
+                            <h2>Notificaciones <small>Notificaciones recientes</small></h2>
+                        </div>
+                        <div class="card-body m-t-20">
+                            <div class="list-group lg-alt">
+                                <a href="" class="list-group-item media">
+                                    <div class="pull-left">
+                                        <img class="avatar-img" src="img/profile-pics/1.jpg" alt="">
+                                    </div>
+
+                                    <div class="media-body">
+                                        <div class="lgi-heading"><strong>Sistema</strong></div>
+                                        <small class="">Esta es una notificación de prueba</small>
+                                        <small class="lgi-text">2016-12-22</small>
+                                    </div>
+                                </a>
+
+                                <a href="" class="list-group-item media">
+                                    <div class="pull-left">
+                                        <img class="avatar-img" src="img/profile-pics/1.jpg" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="lgi-heading"><strong>Sistema</strong></div>
+                                        <small class="">Bienvenido al Sistema Agromil.</small>
+                                        <small class="lgi-text">2016-12-21</small>
+                                    </div>
+                                </a>
+
+                                <a href="" class="list-group-item view-more">
+                                    <i class="zmdi zmdi-long-arrow-right"></i> Ver todas
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </aside>
 
             <section id="content">
                 <div class="container">
                     <div class="card">
                         <div class="card-header">
-                            
+                            <div class="card-header">
+                                <h2 id="lblHome_Periodo"></h2>
+                            </div>
                         </div>
-
-                        <div class="card-body">
-                            <div class="chart-edge">
-                                <div id="curved-line-chart" class="flot-chart "></div>
+                        <div class="card-body card-padding">
+                            <div id="cntHome_BotonesPeriodo" class="row">
+                                <div class="btn-group col-sm-12 p-5">
+                                    <button type="button" id="btnHome_Periodo_Hoy" class="btn btn-primary waves-effect col-xs-3">Hoy</button>
+                                    <button type="button" id="btnHome_Periodo_Ayer" class="btn btn-default waves-effect col-xs-3">Ayer</button>
+                                    <button type="button" id="btnHome_Periodo_Mes" class="btn btn-default waves-effect col-xs-3">Éste Mes</button>
+                                    <div class="btn-group col-xs-3">
+                                        <button type="button" class="btn btn-default dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="true">
+                                            Personalizada
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <div class="input-group form-group">
+                                                    <span class="input-group-addon"><i class="zmdi zmdi-calendar"></i></span>
+                                                    <div class="dtp-container fg-line">
+                                                        <input id="txtHome_Desde" type="text" class="form-control datepicker" placeholder="Desde...">                                   
+                                                    </div>
+                                                </div>
+                                                <div class="input-group form-group">
+                                                    <span class="input-group-addon"><i class="zmdi zmdi-calendar"></i></span>
+                                                    <div class="dtp-container fg-line">
+                                                        <input id="txtHome_Hasta" type="text" class="form-control datepicker" placeholder="Hasta...">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div id="c-grid" class="clearfix" data-columns>
-                        <div id="cntHome_Produccion">
-                            <div class="card c-dark">
-                                <div class="card-header">
-                                    Aun no se ha iniciado el reporte de producción
-                                </div>
-                            </div>
+                    <div>
+                        <div id="cntHome_Produccion" class="clearfix" data-columns>
+
                         </div>
 
-<!--
-                        <div class="card" id="todo-lists">
-                            <div class="card-header ch-dark palette-Purple-300 bg">
-                                <h2>Notificaciones <small></small></h2>
-                            </div>
+                        <div class="col-sm-4">
 
-                            <div class="card-body">
-                                <div class="list-group lg-alt">
-                                    <div class="list-group-item-header palette-Purple text">Hoy</div>
+                            <div class="card rating-list">
+                                <div class="card-header palette-Teal-400 bg">
+                                    <h2 class="palette-White text">Stock en Bodega</h2>
+                                    <small class="palette-White text">Cantidades de Sacos</small>
+                                </div>
 
-                                    <div class="list-group-item media">
-                                        <div class="pull-left">
-                                            <div class="avatar-char ac-check">
-                                                <input class="acc-check" type="checkbox" checked>
-
-                                                <span class="acc-helper palette-Purple-300 bg">C</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="media-body">
-                                            <div class="lgi-heading">Consectetur Sem Sollicitudin</div>
-                                            <small class="lgi-text">08:55 AM</small>
-                                        </div>
-                                    </div>
-
-                                    <div class="list-group-item media">
-                                        <div class="pull-left">
-                                            <div class="avatar-char ac-check">
-                                                <input class="acc-check" type="checkbox" checked>
-
-                                                <span class="acc-helper palette-Purple-300 bg">E</span>
-                                            </div>
-                                        </div>
-                                        <div class="media-body">
-                                            <div class="lgi-heading">Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</div>
-                                            <small class="lgi-text">07:32 AM</small>
-                                        </div>
+                                <div class="card-body">
+                                    <div id="cntHome_StockBodega" class="list-group lg-alt">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        -->
+
+                        <div class="col-sm-4">
+                            <div class="card rating-list">
+                                <div class="card-header text-center">
+                                    <h2>Despachos</h2>
+                                </div>
+
+                                <div class="card-body">
+                                    <div id="cntHome_Despachos" class="list-group lg-alt">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card m-t-10">
+                                <div class="card-header palette-Teal-400 bg">
+                                    <div class="cwh-day">Materia Prima</div>
+                                </div>
+                                <div class="card-body card-padding-sm ">
+                                    <div class="row text-center palette-Teal-200 bg">
+                                        <div class="col-xs-6">
+                                            <h4 class="palette-White text">Salidas</h4>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <h4 class="palette-White text">Ingresos</h4>
+                                        </div>
+                                    </div>
+                                    <div id="cntHome_MateriaPrima" class="list-group lg-alt">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="col-sm-4">
+                            <div class="card rating-list">
+                                <div class="card-header text-center">
+                                    <h2>Despachos por Cliente</h2>
+                                </div>
+
+                                <div class="card-body">
+                                    <div id="cntHome_DespachosPorCliente" class="list-group lg-alt">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card palette-Blue-400 bg">
+                                <div class="card-header palette-Blue-600 bg">
+                                    <div class="cwh-day">Stock de Materia Prima</div>
+                                </div>
+                                <div id="cntStockMateriaPrima" class="pie-grid clearfix text-center">
+                                    <div class="col-xs-4 col-sm-6 col-md-4 pg-item">
+                                        <div class="easy-pie-2 easy-pie" data-percent="92">
+                                            <span class="ep-value">92</span>
+                                        </div>
+                                        <div class="pgi-title">Email<br> Scheduled</div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-6 col-md-4 pg-item">
+                                        <div class="easy-pie-3 easy-pie" data-percent="11">
+                                            <span class="ep-value">11</span>
+                                        </div>
+                                        <div class="pgi-title">Email<br> Bounced</div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-6 col-md-4 pg-item">
+                                        <div class="easy-pie-4 easy-pie" data-percent="52">
+                                            <span class="ep-value">52</span>
+                                        </div>
+                                        <div class="pgi-title">Email<br> Opened</div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-6 col-md-4 pg-item">
+                                        <div class="easy-pie-2 easy-pie" data-percent="44">
+                                            <span class="ep-value">44</span>
+                                        </div>
+                                        <div class="pgi-title">Storage<br>Remaining</div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-6 col-md-4 pg-item">
+                                        <div class="easy-pie-3 easy-pie" data-percent="78">
+                                            <span class="ep-value">78</span>
+                                        </div>
+                                        <div class="pgi-title">Web Page<br> Views</div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-6 col-md-4 pg-item">
+                                        <div class="easy-pie-4 easy-pie" data-percent="32">
+                                            <span class="ep-value">32</span>
+                                        </div>
+                                        <div class="pgi-title">Server<br> Processing</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -143,6 +265,11 @@
         <script src="vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
         <script src="js/flot-charts/curved-line-chart.js"></script>
         <script src="js/flot-charts/line-chart.js"></script>
+
+        <script src="vendors/bower_components/moment/min/moment.min.js"></script>
+        <script src="vendors/bower_components/moment/min/local.es.js"></script>
+        <!--<script src="vendors/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>-->
+        <script src="vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
         <!-- Placeholder for IE9 -->
         <!--[if IE 9 ]>

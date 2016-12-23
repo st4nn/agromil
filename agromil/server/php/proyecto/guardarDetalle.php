@@ -1,11 +1,13 @@
 <?php 
-	include("conectar.php"); 
+	include("../conectar.php"); 
 	$link = Conectar();
+
+   date_default_timezone_set('America/Bogota');
 
 	$parametros = $_POST;
 
 	$columnasParametros = array_keys($parametros);
-   $sql = "SHOW COLUMNS FROM prueba;";
+   $sql = "SHOW COLUMNS FROM Produccion;";
 
    $result = $link->query($sql);
 
@@ -35,7 +37,7 @@
 
          if ($alter <> "")
          {
-         	$alter = "ALTER TABLE prueba " . $alter . ";";
+         	$alter = "ALTER TABLE Produccion " . $alter . ";";
          	$link->query($alter);
 
          	 if ($link->error <> "")
@@ -57,16 +59,20 @@
 
          $campos = substr($campos, 0, -2);
          $values = substr($values, 0, -2);
-         $values2 = substr($values2, 0, -2);
+         $values2 = "fechaCargue = '" . date('Y-m-d H:i:s') . "', " .  substr($values2, 0, -2);
 
          if ($campos <> "")
          {
-         	$sql = "INSERT INTO prueba ($campos) VALUES ($values) ON DUPLICATE KEY UPDATE $values2";
+         	$sql = "INSERT INTO Produccion ($campos) VALUES ($values) ON DUPLICATE KEY UPDATE $values2";
          	$result = $link->query(utf8_decode($sql));
 
          	if ($link->error <> "")
          	 {
          	 	echo $link->error . "<br>" . $sql;
+
+               $fp = fopen('error_' + date('YmdHis') + '.txt', 'w');
+               fwrite($fp, $link->error . " \n " . $sql);
+               fclose($fp);
          	 } else
              {
                echo 1;

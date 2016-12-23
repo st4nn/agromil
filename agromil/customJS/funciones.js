@@ -398,3 +398,34 @@ $.fn.crearDataTable = function(tds, callback)
   $(".DTTT_button").addClass('btn btn-outline btn-default m-l-5');
   callback();
 }
+
+function obtenerColor(hexa)
+{
+  if (hexa === undefined || hexa == false)
+  {
+    var fondos = ['palette-Red', 'palette-Pink', 'palette-Purple', 'palette-Indigo', 'palette-Blue', 'palette-Cyan', 'palette-Teal', 'palette-Green', 'palette-Lime', 'palette-Yellow', 'palette-Amber', 'palette-Orange', 'palette-Brown', 'palette-Grey', 'palette-Black'];
+  } else
+  {
+
+  }
+  return fondos[parseInt(Math.random() * 15)];
+}
+
+function sumarFecha(fecha, days)
+{
+    milisegundos=parseInt(35*24*60*60*1000);
+ 
+    fecha=new Date(fecha);
+    day=fecha.getDate();
+    month=fecha.getMonth()+1;
+    year=fecha.getFullYear();
+ 
+    tiempo=fecha.getTime();
+    milisegundos=parseInt(days*24*60*60*1000);
+    total=fecha.setTime(tiempo+milisegundos);
+    day=fecha.getDate();
+    month=fecha.getMonth()+1;
+    year=fecha.getFullYear();
+ 
+    return year + "-" + CompletarConCero(month, 2)  + "-" + CompletarConCero(day, 2);   
+}
