@@ -27,7 +27,7 @@
             ingresoMateriaPrima 
             INNER JOIN datosUsuarios ON datosUsuarios.idLogin = ingresoMateriaPrima.Usuario
             INNER JOIN materiaPrima ON materiaPrima.id = ingresoMateriaPrima.idMateriaPrima
-            INNER JOIN Proveedores ON Proveedores.id = ingresoMateriaPrima.idProveedor
+            LEFT JOIN Proveedores ON Proveedores.id = ingresoMateriaPrima.idProveedor
             LEFT JOIN Archivos ON Archivos.Prefijo = ingresoMateriaPrima.Prefijo
          GROUP BY 
             ingresoMateriaPrima.Prefijo

@@ -34,7 +34,9 @@
             materiaPrima.Nombre, 
             materiaPrima.siglaUnidades AS Unidades, 
             stock.Cantidad,
-            ((stock.Cantidad/materiaPrima.cantidadMaxima)*100) AS Porcentaje 
+            ((stock.Cantidad/materiaPrima.cantidadMaxima)*100) AS Porcentaje ,
+            materiaPrima.cantidadMinima,
+            materiaPrima.cantidadMaxima
          FROM 
             materiaPrima
             LEFT JOIN stock ON materiaPrima.id = stock.idMateriaPrima 

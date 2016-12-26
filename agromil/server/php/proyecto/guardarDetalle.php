@@ -78,6 +78,8 @@
                echo 1;
              }
          }
+
+         include('descuentoPorFormula.php');
          
    } else
    {

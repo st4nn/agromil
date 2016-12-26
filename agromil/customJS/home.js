@@ -138,7 +138,7 @@ function cargarInicio(Desde, Hasta)
 	        tds += '</div>';
 		});
 
-		tds += '<div class="col-sm-12 p-5 text-right d-block palette palette-Blue bg"><h4 class="text palette-White">Total de productos despachados ' + Total + '</h4></div><br>';
+		tds += '<div class="col-sm-12 p-5 text-right d-block palette palette-Blue bg"><h4 class="text palette-White">Total de productos despachados ' + Total + '</h4></div>';
 
         return tds;
 	}, false, Desde, Hasta, "div", 'despachos');
@@ -249,7 +249,7 @@ function cargarInicio(Desde, Hasta)
 			Porcentaje = ((val.Sacos/Total) * 100).toFixed(2);
 			tds += '<div class="list-group-item media">';
 	            tds += '<div class="pull-left">';
-	              tds += '<i class="zmdi zmdi-truck"></i>';
+	              tds += '<i class="zmdi zmdi-local-mall zmdi-hc-fw"></i>';
 	            tds += '</div>';
 	            tds += '<div class="pull-right">' + val.Sacos + '</div>';
 	            tds += '<div class="media-body">';
@@ -269,6 +269,7 @@ function cargarInicio(Desde, Hasta)
 		var tds = "";
 
 		var contador = 2;
+		var color = "";
 
 		$.each(data, function(index, val) 
 		{
@@ -282,12 +283,17 @@ function cargarInicio(Desde, Hasta)
 				val.Cantidad = 0;
 			}
 
-			
-			tds += '<div class="col-xs-4 col-sm-3 col-md-2 pg-item">';
+			color = "";
+			if (val.Cantidad < val.cantidadMinima || (val.cantidadMaxima > 0 && val.Cantidad > val.cantidadMaxima))
+			{
+				color = "palette-Red";
+			}
+
+			tds += '<div class="col-xs-4 col-sm-6 col-md-4 pg-item">';
                 tds += '<div class="easy-pie-' + contador + ' easy-pie" data-percent="' + val.Porcentaje + '">';
-                    tds += '<span class="ep-value">' + val.Cantidad + '</span>';
+                    tds += '<span class="ep-value ' + color + ' text">' + val.Cantidad + '</span>';
                 tds += '</div>';
-                tds += '<div class="pgi-title o-hidden">' + val.Nombre + ' (<small>' + val.Unidades + '</small>)</div>';
+                tds += '<div class="pgi-title o-hidden ' + color + ' bg">' + val.Nombre + ' (<small>' + val.Unidades + '</small>)</div>';
             tds += '</div>';
 
             contador++;

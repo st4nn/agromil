@@ -31,14 +31,16 @@
    $Usuario = datosUsuario($idUsuario);
 
    $sql = "SELECT 
-               Produccion.NombreReferencia,
+               (CASE WHEN Productos.Nombre IS NULL THEN Produccion.NombreReferencia ELSE CONCAT(Productos.Nombre, ' ', Productos.Presentacion) END) AS NombreReferencia,
                SUM(Produccion.Total) AS Peso,
                SUM(Produccion.Sacos) AS Sacos
          FROM 
             Produccion
+            LEFT JOIN productosTarjeta ON productosTarjeta.codigoReferencia = Produccion.CodigoReferencia AND productosTarjeta.Nombre = Produccion.NombreReferencia
+            LEFT JOIN Productos ON productosTarjeta.id = Productos.idTarjeta
          $where
          GROUP BY 
-            Produccion.NombreReferencia;";
+            Produccion.CodigoReferencia, Produccion.NombreReferencia;";
 
    $result = $link->query($sql);
 

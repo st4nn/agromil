@@ -30,7 +30,30 @@
 
    $Usuario = datosUsuario($idUsuario);
 
-   $sql = "SELECT NombreReferencia, SUM(Sacos) AS Sacos FROM Produccion WHERE 1 GROUP BY CodigoReferencia, NombreReferencia;";
+   $sql = "SELECT id, Producto AS NombreReferencia, SUM(Sacos) AS Sacos
+            FROM(
+            SELECT
+               Productos.id,
+               (CASE WHEN Productos.Nombre IS NULL THEN Produccion.NombreReferencia ELSE CONCAT(Productos.Nombre, ' ', Productos.Presentacion) END) AS Producto,
+               SUM(Produccion.Sacos) AS Sacos
+            FROM 
+               Produccion
+               LEFT JOIN productosTarjeta ON productosTarjeta.codigoReferencia = Produccion.CodigoReferencia AND productosTarjeta.Nombre = Produccion.NombreReferencia
+               LEFT JOIN Productos ON productosTarjeta.id = Productos.idTarjeta
+            GROUP BY
+               Produccion.CodigoReferencia, Produccion.NombreReferencia
+            UNION ALL
+            SELECT 
+               Productos.id,
+               CONCAT(Productos.Nombre, ' ', Productos.Presentacion) AS Producto,
+               (SUM(Despachos.Cantidad) *-1) AS Sacos
+            FROM
+               Productos
+               INNER JOIN Despachos ON Despachos.idProducto = Productos.id
+            GROUP BY 
+               Productos.id
+            ) Datos
+            GROUP BY id, Producto";
 
    $result = $link->query($sql);
 
