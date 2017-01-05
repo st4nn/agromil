@@ -9,7 +9,9 @@
    $sql = "SELECT 
             Proveedores.*
          FROM 
-            Proveedores;";
+            Proveedores
+         WHERE
+            Proveedores.Borrado = 0;";
 
    $result = $link->query($sql);
 

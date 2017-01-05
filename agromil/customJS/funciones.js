@@ -429,3 +429,4 @@ function sumarFecha(fecha, days)
  
     return year + "-" + CompletarConCero(month, 2)  + "-" + CompletarConCero(day, 2);   
 }
+

@@ -40,7 +40,8 @@
          FROM 
             materiaPrima
             LEFT JOIN stock ON materiaPrima.id = stock.idMateriaPrima 
-         WHERE 1
+         WHERE
+            materiaPrima.Borrado = 0
             ORDER BY materiaPrima.Nombre;";
 
    $result = $link->query($sql);

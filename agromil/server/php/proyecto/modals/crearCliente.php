@@ -21,7 +21,7 @@
       }
    } 
 
-   $sql = "SELECT COUNT(*) AS 'Cantidad' FROM Clientes WHERE Nombre LIKE '" . $datos->Nombre . "' AND Nit LIKE '" . $datos->Nit . "';";
+   $sql = "SELECT COUNT(*) AS 'Cantidad' FROM Clientes WHERE Nombre LIKE '" . $datos->Nombre . "' AND Nit LIKE '" . $datos->Nit . "' AND Borrado = 0;";
    $result = $link->query($sql);
 
    $fila =  $result->fetch_array(MYSQLI_ASSOC);

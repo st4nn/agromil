@@ -9,7 +9,9 @@
    $sql = "SELECT 
             materiaPrima.*
          FROM 
-            materiaPrima;";
+            materiaPrima
+         WHERE
+            materiaPrima.Borrado = 0;";
 
    $result = $link->query($sql);
 

@@ -50,9 +50,21 @@ function iniciarModulo()
             closeOnConfirm: true
         }, function(){
             
-            var t = $("#tblProductos_Resultado").DataTable();
-            t.row($(objFila).parent("td").parent("tr")).remove().draw();
+            var fila = $(objFila).parent("td").parent("tr").find('td');
 
+            $.post('server/php/proyecto/modals/borrarElemento.php', {Usuario: Usuario.id, idObj : $(fila[1]).text(), Tabla : 'Productos'}, function(data, textStatus, xhr) 
+            {
+                if (isNaN(data))
+                {
+                    Mensaje("Error", data, 'danger');
+                } else
+                {
+                    var t = $("#tblProductos_Resultado").DataTable();
+                    t.row($(objFila).parent("td").parent("tr")).remove().draw();
+
+                    Mensaje("Hey", 'El producto ha sido borrado', 'success');
+                }
+            });
         });
     });
 

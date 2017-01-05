@@ -12,7 +12,7 @@
          FROM 
             Proveedores
          WHERE 
-            Proveedores.Nombre LIKE '%$Parametro%'
+            Proveedores.Borrado = 0 AND Proveedores.Nombre LIKE '%$Parametro%'
          LIMIT 0, 50;";
 
    $result = $link->query($sql);

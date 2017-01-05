@@ -13,7 +13,7 @@ function iniciarModulo()
         lanzarModalMateriaPrimaAgregar();
         var fila = $(this).parent("td").parent("tr").find("td");
 
-        $("#txtModal_ProductoAgregar_id").val($(this).attr("idProducto"));
+        $("#txtModal_MateriaPrimaAgregar_id").val($(this).attr("idProducto"));
         $("#txtModal_MateriaPrimaAgregar_Nombre").val($(fila[2]).text());
         $("#txtModal_MateriaPrimaAgregar_Unidades").val($(fila[3]).text());
         $("#txtModal_MateriaPrimaAgregar_siglaUnidades").val($(fila[4]).text());
@@ -56,8 +56,21 @@ function iniciarModulo()
             closeOnConfirm: true
         }, function(){
             
-            var t = $("#tblProductos_Resultado").DataTable();
-            t.row($(objFila).parent("td").parent("tr")).remove().draw();
+            var fila = $(objFila).parent("td").parent("tr").find('td');
+
+            $.post('server/php/proyecto/modals/borrarElemento.php', {Usuario: Usuario.id, idObj : $(fila[1]).text(), Tabla : 'materiaPrima'}, function(data, textStatus, xhr) 
+            {
+                if (isNaN(data))
+                {
+                    Mensaje("Error", data, 'danger');
+                } else
+                {
+                    var t = $("#tblProductos_Resultado").DataTable();
+                    t.row($(objFila).parent("td").parent("tr")).remove().draw();
+
+                    Mensaje("Hey", 'El producto ha sido borrado', 'success');
+                }
+            });
 
         });
     });

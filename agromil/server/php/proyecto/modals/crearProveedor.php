@@ -21,12 +21,12 @@
       }
    } 
 
-   $sql = "SELECT COUNT(*) AS 'Cantidad' FROM Proveedores WHERE Nombre = '" . $datos->Nombre . "';";
+   $sql = "SELECT COUNT(*) AS 'Cantidad' FROM Proveedores WHERE Nombre = '" . $datos->Nombre . "' AND Borrado = 0;";
    $result = $link->query($sql);
 
    $fila =  $result->fetch_array(MYSQLI_ASSOC);
 
-   if ($fila['Cantidad'] > 0)
+   if ($fila['Cantidad'] > 0 AND $id == "NULL")
    {
       echo "Ya existe un Proveedor con ese nombre, por favor seleccione otro.";
    } else

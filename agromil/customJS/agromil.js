@@ -172,6 +172,7 @@ function lanzarModalMateriaPrimaAgregar(callback)
             tds += '<div class="modal-dialog">';
                 tds += '<div class="modal-content">';
                     tds += '<form id="frmModal_MateriaPrimaAgregar" class="form-horizontal" role="form">';
+                    	tds += '<input id="txtModal_MateriaPrimaAgregar_id" class="form-control guardar hide">';
                         tds += '<div class="modal-header">';
                             tds += '<h4 class="modal-title">Agregar Materia Prima</h4>';
                         tds += '</div>';
@@ -273,6 +274,7 @@ function lanzarModalProveedorAgregar()
             tds += '<div class="modal-dialog">';
                 tds += '<div class="modal-content">';
                     tds += '<form id="frmModal_ProveedorAgregar" class="form-horizontal" role="form">';
+                    	tds += '<input id="txtModal_ProveedorAgregar_id" class="form-control guardar hide">';
                         tds += '<div class="modal-header">';
                             tds += '<h4 class="modal-title">Agregar Proveedor</h4>';
                         tds += '</div>';
@@ -343,6 +345,7 @@ function lanzarModalServicioPublicoAgregar(callback)
             tds += '<div class="modal-dialog">';
                 tds += '<div class="modal-content">';
                     tds += '<form id="frmModal_ServicioPublicoAgregar" class="form-horizontal" role="form">';
+                    	tds += '<input id="txtModal_ServicioPublicoAgregar_id" class="form-control guardar hide">';
                         tds += '<div class="modal-header">';
                             tds += '<h4 class="modal-title">Agregar Servicio Público</h4>';
                         tds += '</div>';
@@ -498,6 +501,7 @@ function lanzarModalClienteAgregar(callback)
             tds += '<div class="modal-dialog">';
                 tds += '<div class="modal-content">';
                     tds += '<form id="frmModal_ClienteAgregar" class="form-horizontal" role="form">';
+                    	tds += '<input id="txtModal_ClienteAgregar_id" class="form-control guardar hide">';
                         tds += '<div class="modal-header">';
                             tds += '<h4 class="modal-title">Agregar Cliente</h4>';
                         tds += '</div>';

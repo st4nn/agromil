@@ -12,7 +12,7 @@
          FROM 
             materiaPrima
          WHERE 
-            materiaPrima.Nombre LIKE '%$Parametro%'
+            materiaPrima.Borrado = 0 AND materiaPrima.Nombre LIKE '%$Parametro%'
          LIMIT 0, 50;";
 
    $result = $link->query($sql);

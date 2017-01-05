@@ -11,7 +11,9 @@
             Productos.Nombre,
             Productos.Presentacion
          FROM 
-            Productos;";
+            Productos
+         WHERE
+            Productos.Borrado = 0;";
 
    $result = $link->query($sql);
 

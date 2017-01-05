@@ -9,7 +9,9 @@
    $sql = "SELECT 
             serviciosPublicos.*
          FROM 
-            serviciosPublicos;";
+            serviciosPublicos
+         WHERE
+            serviciosPublicos.Borrado = 0;";
 
    $result = $link->query($sql);
 

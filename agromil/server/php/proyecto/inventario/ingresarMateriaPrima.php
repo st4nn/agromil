@@ -57,7 +57,7 @@
   {
       echo $nuevoId;
 
-      $sql = "INSERT INTO stock(idMateriaPrima, Cantidad, valorPromedio) VALUES (
+      /*$sql = "INSERT INTO stock(idMateriaPrima, Cantidad, valorPromedio) VALUES (
          '" . $datos->idMateriaPrima . "',
          '" . $datos->Cantidad . "',
          '" . $datos->Valor . "'
@@ -65,6 +65,6 @@
       Cantidad = Cantidad + VALUES(Cantidad),
       valorPromedio = ((valorPromedio + VALUES(valorPromedio))/2);";
 
-      $link->query(utf8_decode($sql));
+      $link->query(utf8_decode($sql));*/
   }
 ?>

@@ -13,7 +13,7 @@ function iniciarModulo()
         lanzarModalClienteAgregar();
         var fila = $(this).parent("td").parent("tr").find("td");
 
-        $("#txtModal_ProductoAgregar_id").val($(this).attr("idProducto"));
+        $("#txtModal_ClienteAgregar_id").val($(this).attr("idProducto"));
         $("#txtModal_ClienteAgregar_Nombre").val($(fila[2]).text());
         $("#txtModal_ClienteAgregar_Nit").val($(fila[3]).text());
         $("#txtModal_ClienteAgregar_Telefono").val($(fila[4]).text());
@@ -56,8 +56,21 @@ function iniciarModulo()
             closeOnConfirm: true
         }, function(){
             
-            var t = $("#tblProductos_Resultado").DataTable();
-            t.row($(objFila).parent("td").parent("tr")).remove().draw();
+            var fila = $(objFila).parent("td").parent("tr").find('td');
+
+            $.post('server/php/proyecto/modals/borrarElemento.php', {Usuario: Usuario.id, idObj : $(fila[1]).text(), Tabla : 'Clientes'}, function(data, textStatus, xhr) 
+            {
+                if (isNaN(data))
+                {
+                    Mensaje("Error", data, 'danger');
+                } else
+                {
+                    var t = $("#tblProductos_Resultado").DataTable();
+                    t.row($(objFila).parent("td").parent("tr")).remove().draw();
+
+                    Mensaje("Hey", 'El producto ha sido borrado', 'success');
+                }
+            });
 
         });
     });

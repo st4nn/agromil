@@ -9,7 +9,9 @@
    $sql = "SELECT 
             Clientes.*
          FROM 
-            Clientes;";
+            Clientes
+         WHERE
+            Clientes.Borrado = 0;";
 
    $result = $link->query($sql);
 
