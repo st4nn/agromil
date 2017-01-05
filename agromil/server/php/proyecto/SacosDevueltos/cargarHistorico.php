@@ -10,24 +10,23 @@
    $Usuario = datosUsuario($idUsuario);
 
    $sql = "SELECT 
-               Despachos.id,
-               Despachos.Fecha,
+               sacosDevueltos.id,
+               sacosDevueltos.Fecha,
                CONCAT(Productos.Nombre, ' ', Productos.Presentacion) AS Producto, 
-               Clientes.Nombre AS 'Cliente',
-               Despachos.Cantidad, 
-               Despachos.Observaciones, 
-               Despachos.fechaCargue, 
+               sacosDevueltos.Cantidad, 
+               sacosDevueltos.CantidadKg,
+               sacosDevueltos.Observaciones, 
+               sacosDevueltos.fechaCargue, 
                datosUsuarios.Nombre AS Usuario,
                COUNT(Archivos.id) AS Adjuntos
          FROM 
-            Despachos  
-            INNER JOIN Productos ON Productos.id = Despachos.idProducto 
-            LEFT JOIN Clientes ON Clientes.id = Despachos.idCliente 
-            INNER JOIN datosUsuarios ON datosUsuarios.idLogin = Despachos.Usuario
-            LEFT JOIN Archivos ON Archivos.Prefijo = Despachos.Prefijo
+            sacosDevueltos  
+            INNER JOIN Productos ON Productos.id = sacosDevueltos.idProducto 
+            INNER JOIN datosUsuarios ON datosUsuarios.idLogin = sacosDevueltos.Usuario
+            LEFT JOIN Archivos ON Archivos.Prefijo = sacosDevueltos.Prefijo
          GROUP BY 
-            Despachos.Prefijo
-         ORDER BY Despachos.fechaCargue DESC  LIMIT 10;";
+            sacosDevueltos.Prefijo
+         ORDER BY sacosDevueltos.fechaCargue DESC  LIMIT 10;";
 
    $result = $link->query($sql);
 

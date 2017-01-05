@@ -10,6 +10,7 @@
    $Usuario = datosUsuario($idUsuario);
 
    $sql = "SELECT 
+               ingresoServiciosPublicos.id,
                CONCAT (DATE_FORMAT('%Y %m/%d', ingresoServiciosPublicos.Desde), ' ', DATE_FORMAT('%Y %m/%d', ingresoServiciosPublicos.Hasta)) AS 'Periodo',
                serviciosPublicos.Nombre, 
                CONCAT (ingresoServiciosPublicos.Consumo, ' ', serviciosPublicos.Unidades) AS 'Consumo',

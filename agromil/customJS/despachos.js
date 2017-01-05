@@ -81,6 +81,7 @@ function iniciarModulo()
 					Mensaje("Hey", "Los datos han sido Ingresados", "success");
 
 					var parametros = {
+                        id : data,
 						Producto : $("#txtDespacho_idProducto option:selected").html(),
 						Cliente : $("#txtDespacho_Cliente option:selected").html(),
 						Fecha : $("#txtDespacho_Fecha").val() + ' ' + $("#txtDespacho_Hora").val(),
@@ -111,6 +112,38 @@ function iniciarModulo()
 	});
 
 	despachos_CargarLog();
+
+    $(document).delegate('.btnObjeto_Eliminar', 'click', function(event) 
+    {
+        var objFila = this;
+        var idObj = $(objFila).attr('idObjeto');
+        swal({
+            title: "Está Seguro?",
+            text: "Después de borrar, éste registro no podrá recuperarse!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#f44336",
+            confirmButtonText: "Si, Borrar!",
+            cancelButtonText : "Cancelar",
+            closeOnConfirm: true
+        }, function(){
+            
+            var fila = $(objFila).parent("td").parent("tr").find('td');
+
+            $.post('server/php/proyecto/modals/eliminarElemento.php', {Usuario: Usuario.id, idObj : idObj, Tabla : 'Despachos'}, function(data, textStatus, xhr) 
+            {
+                if (isNaN(data))
+                {
+                    Mensaje("Error", data, 'danger');
+                } else
+                {
+                    $(objFila).parent("td").parent("tr").remove();
+
+                    Mensaje("Hey", 'El Registro ha sido eliminado', 'success');
+                }
+            });
+        });
+    });
 }
 
 function despachos_CargarLog()
@@ -138,6 +171,7 @@ function despachos_AgregarAlHistorico(parametros, primero)
 	{
 		var tds = "";
 		tds += '<tr>';
+            tds += '<td><button idObjeto="' + parametros.id + '" class="btn btn-danger btn-icon waves-effect waves-circle waves-float btnObjeto_Eliminar"><i class="zmdi zmdi-delete"></i> </button></td>';
             tds += '<td>' + parametros.Producto + '</td>';
             tds += '<td>' + parametros.Cliente + '</td>';
             tds += '<td>' + parametros.Fecha + '</td>';

@@ -23,7 +23,10 @@
 
    if ($where <> "")
    {
-      $where = " WHERE " . $where;
+      $where = " WHERE " . $where . 'AND Borrado = 0';
+   } else
+   {
+      $where = ' WHERE Borrado = 0';
    }
 
    $Usuario = datosUsuario($idUsuario);

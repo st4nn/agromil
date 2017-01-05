@@ -348,6 +348,50 @@ function cargarInicio(Desde, Hasta)
 
         return tds;
 	}, false, Desde, Hasta, "div", 'Movimiento de Servicios Públicos');
+
+	$("#cntHome_SacosDevueltos").cargarDatosInicio('cargarSacosDevueltos', function(data)
+	{
+		var tds = "";
+		var Cantidad = data[(data.length-1)].Cantidad;
+		var CantidadKg = data[(data.length-1)].CantidadKg;
+
+		var PorcentajeCantidad = 0;
+		var PorcentajeCantidadKg = 0;
+
+		var color = "";
+
+		$.each(data, function(index, val) 
+		{
+			color = obtenerColor();
+
+			PorcentajeCantidad = ((val.Cantidad/Cantidad) * 100).toFixed(2);
+			PorcentajeCantidadKg = ((val.CantidadKg/CantidadKg) * 100).toFixed(2);
+
+			tds += '<div class="list-group-item media">';
+	            tds += '<div class="media-body">';
+	            	tds += '<div class="lgi-heading m-b-5 text-center">' + val.Producto + '</div>';
+	            	tds += '<div class="col-xs-3">' + val.CantidadKg;
+	            	tds += '</div>';
+	            	tds += '<div class="col-xs-3">';
+		                tds += '<div class="progress">';
+		                    tds += '<div class="progress-bar ' + color + ' palette bg" role="progressbar" aria-valuenow="' + val.CantidadKg + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + PorcentajeCantidadKg + '%">';
+		                    tds += '</div>';
+		                tds += '</div>';
+		            tds += '</div>';
+		            tds += '<div class="col-xs-3">' + val.Cantidad;
+	            	tds += '</div>';
+		            tds += '<div class="col-xs-3">';
+		                tds += '<div class="progress">';
+		                    tds += '<div class="progress-bar ' + color + ' palette bg" role="progressbar" aria-valuenow="' + val.Cantidad + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + PorcentajeCantidad + '%">';
+		                    tds += '</div>';
+		                tds += '</div>';
+		            tds += '</div>';
+	            tds += '</div>';
+	        tds += '</div>';
+		});
+
+        return tds;
+	}, false, Desde, Hasta, "div", 'registro de Sacos Devueltos');
 }
 
 $.fn.cargarDatosInicio = function(url, laFuncion,  funcionEach, Desde, Hasta, tipoContenedor, tipoDatos, callback)

@@ -40,11 +40,15 @@
 
                 </ul>
 
+                <ul class="main-menu">
+                	<br><br><br>
+                    <li><a href="#" id="lnkSacosDevueltosAgregarProducto"><i class="zmdi zmdi-accounts-add"></i> Agregar Producto</a></li>
+                </ul>
             </aside>
 
             <section id="content">
                 <div class="container">
-                    <form id="frmDespacho">
+                    <form id="frmSacosDevueltos">
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-header">
@@ -52,11 +56,11 @@
                                 </div>
                                 <div class="card-body card-padding form-horizontal">
                                     <div class="form-group">
-                                        <label for="txtDespacho_idServicio" class="col-sm-5 control-label">Seleccione un Producto</label>
+                                        <label for="txtSacosDevueltos_idServicio" class="col-sm-5 control-label">Seleccione un Producto</label>
                                         <div class="col-sm-7">
                                             <div class="fg-line">
                                                 <div class="select">
-                                                    <select class="form-control selectpicker guardar" id="txtDespacho_idProducto" data-live-search="true" placeholder="Servicio Público" required>
+                                                    <select class="form-control selectpicker guardar" id="txtSacosDevueltos_idProducto" data-live-search="true" placeholder="Servicio Público" required>
                                                         <option value="">1</option>
                                                     </select>
                                                 </div>
@@ -65,7 +69,7 @@
                                     </div> 
 
                                     <div class="table-responsive">
-                                        <table id="tblDespacho_Log" class="table table-bordered">
+                                        <table id="tblSacosDevueltos_Log" class="table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>Fecha</th>
@@ -78,35 +82,32 @@
                                 </div>
                             </div>
 
-                            <div id="cntDespacho_Archivos">
-                                
-                            </div>
                         </div>
-                        <input type="hidden" id="txtDespacho_Prefijo" class="guardar">
+                        <input type="hidden" id="txtSacosDevueltos_Prefijo" class="guardar">
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="card-header">
-                                    <h2>Salida de Productos</h2>
+                                    <h2>Devolución de Productos</h2>
                                 </div>
 
                                 <div class="card-body card-padding form-horizontal">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="txtDespacho_Fecha" class="col-sm-4 control-label">Fecha Real</label>
+                                                <label for="txtSacosDevueltos_Fecha" class="col-sm-4 control-label">Fecha Real</label>
                                                 <div class="col-sm-8">
                                                     <div class="fg-line">
-                                                        <input type="text" class="form-control datepicker guardar" id="txtDespacho_Fecha" placeholder="Fecha" required>
+                                                        <input type="text" class="form-control datepicker guardar" id="txtSacosDevueltos_Fecha" placeholder="Fecha" required>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="txtDespacho_Fecha" class="col-sm-4 control-label">Hora</label>
+                                                <label for="txtSacosDevueltos_Fecha" class="col-sm-4 control-label">Hora</label>
                                                 <div class="col-sm-8">
                                                     <div class="fg-line">
-                                                        <input type="text" class="form-control time-picker guardar" id="txtDespacho_Hora" placeholder="Hora" required>
+                                                        <input type="text" class="form-control time-picker guardar" id="txtSacosDevueltos_Hora" placeholder="Hora" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -114,24 +115,23 @@
                                         
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6 form-group">
-                                            <label for="txtDespacho_Cliente" class="col-sm-4 control-label">Cliente</label>
-                                            <div class="col-sm-8">
-                                                <div class="fg-line">
-                                                    <div class="select">
-                                                        <select class="form-control selectpicker guardar"  id="txtDespacho_Cliente" data-live-search="true" placeholder="Cliente">
-                                                            <option value="">1</option>
-                                                        </select>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="txtSacosDevueltos_Cantidad" class="col-sm-4 control-label">Cantidad en Sacos</label>
+                                                <div class="col-sm-8">
+                                                    <div class="fg-line">
+                                                        <input type="number" class="form-control guardar"  step="any" id="txtSacosDevueltos_Cantidad" placeholder="Cantidad Unidades" required>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>  
+                                        </div>
+
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="txtDespacho_Cantidad" class="col-sm-4 control-label">Cantidad</label>
+                                                <label for="txtSacosDevueltos_Cantidad" class="col-sm-4 control-label">Cantidad en Kilogramos</label>
                                                 <div class="col-sm-8">
                                                     <div class="fg-line">
-                                                        <input type="number" class="form-control guardar"  step="any" id="txtDespacho_Cantidad" placeholder="Cantidad" required>
+                                                        <input type="number" class="form-control guardar"  step="any" id="txtSacosDevueltos_CantidadKg" placeholder="Cantidad Kg" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -139,10 +139,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 form-group">
-                                            <label for="txtDespacho_Observaciones" class="col-sm-2 control-label">Observaciones</label>
+                                            <label for="txtSacosDevueltos_Observaciones" class="col-sm-2 control-label">Observaciones</label>
                                             <div class="col-sm-10">
                                                 <div class="fg-line">
-                                                    <textarea class="form-control guardar" id="txtDespacho_Observaciones" rows="3" placeholder="Observaciones"></textarea>
+                                                    <textarea class="form-control guardar" id="txtSacosDevueltos_Observaciones" rows="3" placeholder="Observaciones"></textarea>
                                                 </div>
                                             </div>
                                         </div>  
@@ -157,18 +157,18 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h2>Histórico <small>Estos son los ultimos despachos</h2>
+                                <h2>Histórico <small>Estos son los ultimos Sacos Devueltos</h2>
                             </div>
 
                             <div class="table-responsive">
-                                <table id="tblDespacho_Historico" class="table table-bordered">
+                                <table id="tblSacosDevueltos_Historico" class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th></th>
                                             <th>Producto</th>
-                                            <th>Cliente</th>
                                             <th>Fecha</th>
-                                            <th>Cantidad</th>
+                                            <th>Cantidad de Sacos</th>
+                                            <th>Cantidad de Kilogramos</th>
                                             <th>Fecha Diligenciamiento</th>
                                             <th>Usuario</th>
                                             <th>Observaciones</th>
@@ -231,7 +231,7 @@
 
         <script src="customJS/funciones.js"></script>
         <script src="customJS/agromil.js"></script>
-        <script src="customJS/despachos.js"></script>
+        <script src="customJS/sacosDevueltos.js"></script>
         
 
 

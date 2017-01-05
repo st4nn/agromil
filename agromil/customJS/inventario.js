@@ -48,6 +48,7 @@ function iniciarModulo()
 					Mensaje("Hey", "Los datos han sido Ingresados", "success");
 
 					var parametros = {
+						id : data,
 						FechaIngreso : obtenerFecha().substr(0,10),
 						MateriaPrima :  $("#select2-txtInventario_idMateriaPrima-container").text(),
 						Proveedor : $("#select2-txtInventario_idProveedor-container").html(),
@@ -91,6 +92,38 @@ function iniciarModulo()
 		evento.preventDefault();
 		lanzarModalProveedorAgregar();
 	});
+
+	$(document).delegate('.btnObjeto_Eliminar', 'click', function(event) 
+    {
+        var objFila = this;
+        var idObj = $(objFila).attr('idObjeto');
+        swal({
+            title: "Está Seguro?",
+            text: "Después de borrar, éste registro no podrá recuperarse!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#f44336",
+            confirmButtonText: "Si, Borrar!",
+            cancelButtonText : "Cancelar",
+            closeOnConfirm: true
+        }, function(){
+            
+            var fila = $(objFila).parent("td").parent("tr").find('td');
+
+            $.post('server/php/proyecto/modals/eliminarElemento.php', {Usuario: Usuario.id, idObj : idObj, Tabla : 'ingresoMateriaPrima'}, function(data, textStatus, xhr) 
+            {
+                if (isNaN(data))
+                {
+                    Mensaje("Error", data, 'danger');
+                } else
+                {
+                    $(objFila).parent("td").parent("tr").remove();
+
+                    Mensaje("Hey", 'El Registro ha sido eliminado', 'success');
+                }
+            });
+        });
+    });
 }
 
 function inventario_CargarLog()
@@ -119,6 +152,7 @@ function inventario_AgregarAlLog(parametros, primero)
 	{
 		var tds = "";
 		tds += '<tr>';
+			tds += '<td><button idObjeto="' + parametros.id + '" class="btn btn-danger btn-icon waves-effect waves-circle waves-float btnObjeto_Eliminar"><i class="zmdi zmdi-delete"></i> </button></td>';
             tds += '<td>' + parametros.FechaIngreso + '</td>';
             tds += '<td>' + parametros.MateriaPrima + '</td>';
             tds += '<td>' + parametros.Proveedor + '</td>';
